@@ -5,12 +5,14 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './login/register.component';
 
+//Servicios
+import { SettingsService } from './services/settings.service';
+
 //Rutas
 import { APP_ROUTES } from './app.routes';
 
 //Modulos
 import { PagesModule } from './pages/pages.module';
-
 import { FormsModule } from '@angular/forms';
 
 
@@ -30,7 +32,7 @@ import { FormsModule } from '@angular/forms';
     APP_ROUTES,
     FormsModule
   ],
-  providers: [],
+  providers: [SettingsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
