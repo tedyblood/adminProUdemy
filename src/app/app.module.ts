@@ -5,15 +5,13 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './login/register.component';
 
-//Servicios
-import { SettingsService } from './services/settings.service';
-
 //Rutas
 import { APP_ROUTES } from './app.routes';
 
 //Modulos
 import { PagesModule } from './pages/pages.module';
 import { FormsModule } from '@angular/forms';
+import { ServiceModule } from './services/service.module';
 
 
 
@@ -30,9 +28,10 @@ import { FormsModule } from '@angular/forms';
     PagesModule,
     BrowserModule,
     APP_ROUTES,
-    FormsModule
+    FormsModule,
+    ServiceModule
   ],
-  providers: [SettingsService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
