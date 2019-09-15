@@ -1,9 +1,12 @@
 import { NgModule } from "@angular/core";
+import {FormsModule} from '@angular/forms'
+import { HttpClientModule } from '@angular/common/http'
+import { CommonModule } from "@angular/common";
+
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProgressComponent } from './progress/progress.component';
 import { Graficas1Component } from './graficas1/graficas1.component';
 import { PagesComponent } from './pages.component';
-import {FormsModule} from '@angular/forms'
 
 import { ChartsModule } from 'ng2-charts';
 
@@ -14,6 +17,9 @@ import { GraficoComponent } from '../components/grafico/grafico.component';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { PromesasComponent } from './promesas/promesas.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
+import { ConsumeApiComponent } from './consumeapi/consume-api.component';
+import { FiltroHtmlPipe } from '../pipe/filtro-html.pipe';
+
 
 
 @NgModule({
@@ -26,7 +32,9 @@ import { RxjsComponent } from './rxjs/rxjs.component';
         GraficoComponent,
         AccountSettingsComponent,
         PromesasComponent,
-        RxjsComponent
+        RxjsComponent,
+        ConsumeApiComponent,
+        FiltroHtmlPipe
     ],
     exports:[
         DashboardComponent,
@@ -37,7 +45,9 @@ import { RxjsComponent } from './rxjs/rxjs.component';
         ShareModule,
         PAGES_ROUTES,
         FormsModule,
-        ChartsModule
+        ChartsModule,
+        HttpClientModule,
+        CommonModule
     ]
 })
 
