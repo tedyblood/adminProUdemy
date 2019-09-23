@@ -1,11 +1,16 @@
 <div class="row">
-    <div class="col-12" *ngFor="let item of datosBajados">
-        <div class="card">
+    <div class="col-6" *ngFor="let item of datosBajados">
+        <div class="card  card-outline-warning" *ngFor="let data of item">
             <div class="card-body">
                 <div class="cartitle">
-                    <h2>{{ item.title.rendered}}</h2>
+                    <h2>{{ data.title.rendered }}</h2>
                 </div>
-                <p class="card-text" [innerHTML]="item.excerpt.rendered"></p>
+                <img class="card-img-top img-responsive" src="{{ data._embedded['wp:featuredmedia']['0'].source_url }}" alt="Card image cap">
+                <br><br><span>Fecha del Artículo: {{ data.date | date:'short' }}</span>
+                <hr>
+                <p class="card-text" [innerHTML]="data.excerpt.rendered"></p>
+                <p>Autor: {{ data._embedded.author[0].name }} </p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
             </div>
         </div>
     </div>

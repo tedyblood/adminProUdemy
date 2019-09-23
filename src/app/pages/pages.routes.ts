@@ -7,6 +7,7 @@ import { AccountSettingsComponent } from './account-settings/account-settings.co
 import { PromesasComponent } from './promesas/promesas.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
 import { ConsumeApiComponent } from './consumeapi/consume-api.component';
+import { ConsumeApiDosComponent } from './consume-api-dos/consume-api-dos.component';
 
 
 const pagesRoutes: Routes = [
@@ -14,13 +15,14 @@ const pagesRoutes: Routes = [
         path: '',
         component: PagesComponent,
         children : [
-            {path: 'dashboard',     component: DashboardComponent},
-            {path: 'progress',      component: ProgressComponent},
-            {path: 'grafica1',      component: Graficas1Component},
-            {path: 'promesas',      component: PromesasComponent},
-            {path: 'rxjs',      component: RxjsComponent},
-            {path: 'consumeapi',      component: ConsumeApiComponent},
-            {path: 'accountset',      component: AccountSettingsComponent},
+            {path: 'dashboard',     component: DashboardComponent, data:{ titulo: 'Escritorio'}},
+            {path: 'progress',      component: ProgressComponent, data:{ titulo: 'Progress'}},
+            {path: 'grafica1',      component: Graficas1Component, data:{ titulo: 'Gráficas'}},
+            {path: 'promesas',      component: PromesasComponent, data:{ titulo: 'Promesas'}},
+            {path: 'rxjs',      component: RxjsComponent, data:{ titulo: 'RXJS'}},
+            {path: 'consumeapi',      component: ConsumeApiComponent, data:{ titulo: 'Laboratorio'}},
+            {path: 'api2',      component: ConsumeApiDosComponent, data:{ titulo: 'Laboratorio 2'}},
+            {path: 'accountset',      component: AccountSettingsComponent, data:{ titulo: 'Ajustes del tema'}},
             {path: '',              redirectTo: '/dashboard', pathMatch: 'full' }
         ]
     }

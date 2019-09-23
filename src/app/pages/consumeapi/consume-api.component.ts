@@ -3,6 +3,8 @@ import {CommonModule} from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { FiltroHtmlPipe } from '../../pipe/filtro-html.pipe'
+import { promise } from 'protractor';
+import { resolve } from 'path';
 
 @Component({
   selector: 'app-consume-api',
@@ -11,21 +13,94 @@ import { FiltroHtmlPipe } from '../../pipe/filtro-html.pipe'
 })
 export class ConsumeApiComponent implements OnInit {
       
+  verifica: boolean = false;
   // apiURL = 'https://www.socialmedia-panama.com/wp-json/wp/v2/posts?_embed&per_page=10';
-  num_post: number = 2;
-  urlBase = ['https://woodemia.com/',
-            'https://socialmedia-panama.com/']
+
+  num_post: number =15;
+
+  urlBase = [ 'https://woodemia.com/',
+              'https://socialmedia-panama.com/',
+              'https://claudioinacio.com/',
+              'https://aulacm.com/',
+              'https://www.trecebits.com/',
+              'https://josefacchin.com/',
+              'https://www.evacolladoduran.com/',
+              'https://www.mabelcajal.com/',
+              'https://www.begoromero.com/',
+              'https://www.eliaguardiola.com/',
+              'https://www.davidayala.com/',
+              'https://rubenmanez.com/',
+              'https://ignaciosantiago.com/',
+              'https://wanatop.com/',
+              'https://amalialopezacera.com/',
+              'https://www.socialmediaexaminer.com/',
+              'https://luismvillanueva.com/',
+              'https://anatrenza.com/',
+              'https://later.com/blog/',
+              'https://miguelangeltrabado.es/',
+              'http://www.christiandve.com/',
+              'https://jessicaquero.com/',
+              'https://somechat.es',
+              'https://africalucena.com/',
+              'https://marketerosdehoy.com/',
+              'https://tristanelosegui.com/',
+              'https://www.juancmejia.com/',
+              'https://www.uncommunitymanager.es/',
+              'https://tuwebdecero.com/',
+              'https://anaivars.com/',
+              'https://ismaelruizg.com/',
+              'https://vilmanunez.com/',
+              'https://alexserrano.es/',
+              'https://www.jluislopez.es/']
+              
   apiURL = `${this.urlBase[0]}wp-json/wp/v2/posts?_embed&per_page=${this.num_post}`;
   datosBajados = [];
+
 
   constructor(private _http: HttpClient) {
   }
 
   ngOnInit() {
 
-    this._http.get(this.apiURL).subscribe<WP>(data => {this.datosBajados = data;});
-    this.esperarData();
+    this.cargarTodalaData();
+  }
 
+  cargarTodalaData(){
+
+    for (let index = 0; index < this.urlBase.length; index++) {
+
+      this.apiURL = `${this.urlBase[index]}wp-json/wp/v2/posts?_embed&per_page=${this.num_post}`;
+      this._http.get(this.apiURL).subscribe(data => {this.datosBajados.push(data)});
+      this.esperarData();
+      
+      
+
+      let obs = new Observable( observer => {
+        let intervalo = setInterval ( () => {
+          this.verificaDataCargada().then (
+            (e) => {console.log( 'Exito', e),
+                    clearInterval(intervalo)}
+          )
+          .catch( error => {console.error('Error en la carga'),
+                            clearInterval(intervalo)})
+        },1000)
+      })
+      
+    }
+  }
+
+  
+
+  verificaDataCargada(): Promise<boolean>{
+    return new Promise ((resolve, reject) => {
+      let intervalo = setInterval ( () =>{
+        if(this.verifica){
+          resolve()
+        }else{
+          reject();
+        }
+      },1000);
+    })
   }
 
   esperarData(){
@@ -38,7 +113,7 @@ export class ConsumeApiComponent implements OnInit {
             clearInterval( intervalo);
             observer.complete();
           }
-          if (contador === 100){
+          if (contador === 5){
             observer.error('La data no se asigna');
           }
       },  1000 );
@@ -47,8 +122,9 @@ export class ConsumeApiComponent implements OnInit {
       seg => { console.log('Seg ', seg),
                   console.log(this.datosBajados)},
       error => console.log('Error en el obs ', error),
-      () => console.log('El observador terminó')
+      () => {console.log('El observador terminó')}
     );
+    return this.verifica = true;
   }
   
 }

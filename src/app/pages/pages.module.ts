@@ -19,6 +19,7 @@ import { PromesasComponent } from './promesas/promesas.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
 import { ConsumeApiComponent } from './consumeapi/consume-api.component';
 import { FiltroHtmlPipe } from '../pipe/filtro-html.pipe';
+import { ConsumeApiDosComponent } from './consume-api-dos/consume-api-dos.component';
 
 
 
@@ -34,7 +35,8 @@ import { FiltroHtmlPipe } from '../pipe/filtro-html.pipe';
         PromesasComponent,
         RxjsComponent,
         ConsumeApiComponent,
-        FiltroHtmlPipe
+        FiltroHtmlPipe,
+        ConsumeApiDosComponent
     ],
     exports:[
         DashboardComponent,
